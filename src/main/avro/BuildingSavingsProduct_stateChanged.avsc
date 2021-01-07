@@ -1,0 +1,14 @@
+{
+  "type" : "record",
+  "name" : "BuildingSavingsProduct_stateChanged",
+  "namespace" : "cz.csas.avroschemas.buildingsavingsproduct_statechanged.v03_01",
+  "fields" : [ {
+    "name" : "productOperationId",
+    "type" : "string",
+    "doc" : "Indentifikator prikazu (operace) nad produktem stavebniho sporeni v ramci volajiciho systemu"
+  }, {
+    "name" : "result",
+    "type" : "string",
+    "doc" : "Vysledek zpracovani pozadavku v Obchodnim pripadu (OP).\r\n\r\nOcekavane hodnoty: (BS_REVOKED) - OP revokovan, (BS_CLOSED) - OP uzavren"
+  } ]
+}

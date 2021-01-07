@@ -1,0 +1,16 @@
+bs:
+  topic:
+    case-update: CMD.BuildingSavingsCase_update
+    modelation-changed: EVT.BuildingSavingsModelation_changed
+
+quarkus:
+  kafka-streams:
+    bootstrap:
+      servers:
+        - localhost:9092
+    schema:
+      registry:
+        url: http://example.com
+    topics:
+      - CMD.BuildingSavingsCase_update
+      - EVT.BuildingSavingsModelation_changed

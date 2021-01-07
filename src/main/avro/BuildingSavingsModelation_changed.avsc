@@ -1,0 +1,186 @@
+{
+  "type": "record",
+  "name": "BuildingSavingsModelation_changed",
+  "namespace": "cz.csas.avroschemas.BuildingSavingsModelation_changed.v1",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "cluid",
+      "type": "string"
+    },
+    {
+      "name": "date",
+      "type": [
+        "null",
+        {
+          "type": "long",
+          "logicalType": "timestamp-millis"
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "channel",
+      "type": [ "null", "string" ]
+    },
+    {
+      "name": "firstModelationDate",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "modelation",
+      "type": {
+        "type": "record",
+        "name": "Modelation",
+        "fields": [
+          {
+            "name": "participantType",
+            "type": {
+              "type": "enum",
+              "name": "ParticipantType",
+              "doc": "Pro koho se spori",
+              "symbols": [ "CHILD", "ME" ]
+            },
+            "doc": "Pro koho se spori"
+          },
+          {
+            "name": "years",
+            "type": "int",
+            "doc": "Pocet let stavebniho sporeni"
+          },
+          {
+            "name": "monthlyDeposit",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 18,
+              "scale": 4
+            },
+            "doc": "Mesicni ulozka Stavebniho sporeni"
+          },
+          {
+            "name": "stateSubsidy",
+            "type": "boolean",
+            "doc": "Pozadovano priznani statni podpory"
+          },
+          {
+            "name": "targetAmount",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 18,
+              "scale": 4
+            },
+            "doc": "Cilova castka Stavebniho sporeni"
+          },
+          {
+            "name": "depositSum",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 18,
+              "scale": 4
+            },
+            "doc": "Vyse (suma) ucastnikovych vkladu za dobu trvani stavebniho sporeni (v korunach)\r\n\r\nPoznamka: vypocitano jako suma mesicnich vkladu * pocet let * 12 + suma jednorazovych vkladu (tj. mimoradne vklady + prvni platba)"
+          },
+          {
+            "name": "subsidyAmountSum",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 18,
+              "scale": 4
+            },
+            "doc": "Maximalni vyse (suma) statni podpory za dobu trvani stavebniho sporeni (v korunach)\r\n\r\nPoznamka: vypoctena jako pocet let * min{10% z rocni nasporene castce ( = 12 * mesicni vklad ), 2000}"
+          },
+          {
+            "name": "interestAfterTax",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 18,
+              "scale": 4
+            },
+            "doc": "Suma pripsanych uroku po zdaneni (v korunach)"
+          },
+          {
+            "name": "contractingFee",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 18,
+              "scale": 4
+            },
+            "doc": "Uhrada za uzavreni smlouvy / dodatku ke smlouve."
+          },
+          {
+            "name": "contractingFeeRatio",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 20,
+              "scale": 10
+            },
+            "doc": "Uhrada za uzavreni smlouvy / dodatku ke smlouve v % z cilove castky."
+          },
+          {
+            "name": "managementFeeTotal",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 18,
+              "scale": 4
+            },
+            "doc": "Cena za vedeni uctu po predpokladanou dobu  (v korunach)\r\n\r\nPoznamka: vypoctena jako pocet let * management Fee (za rok)"
+          },
+          {
+            "name": "managementFeeYearly",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 18,
+              "scale": 4
+            },
+            "doc": "Cena za vedeni uctu (absolutne v Kc / rok)"
+          },
+          {
+            "name": "totalSavings",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 18,
+              "scale": 4
+            },
+            "doc": "Vyse (suma) prostredku na konci sporeni (v korunach)"
+          },
+          {
+            "name": "depositInterestRate",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 10,
+              "scale": 3
+            },
+            "doc": "Urokova sazba vkladu Stavebniho sporeni"
+          },
+          {
+            "name": "loanInterestRate",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 10,
+              "scale": 3
+            },
+            "doc": "Urokova sazba uveru ze Stavebniho sporeni"
+          }
+        ]
+      }
+    }
+  ]
+}

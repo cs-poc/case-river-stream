@@ -1,0 +1,90 @@
+{
+  "type": "record",
+  "name": "BuildingSavingsApplication_clientDataChanged",
+  "namespace": "cz.csas.avroschemas.BuildingSavingsApplication_clientDataChanged.v1",
+  "fields": [
+    {
+      "name": "caseId",
+      "type": "string"
+    },
+    {
+      "name": "cluid",
+      "type": "string"
+    },
+    {
+      "name": "date",
+      "type": [
+        "null",
+        {
+          "type": "long",
+          "logicalType": "timestamp-millis"
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "channel",
+      "type": [ "null", "string" ]
+    },
+    {
+      "name": "contacts",
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "Contacts",
+          "fields": [
+            {
+              "name": "email",
+              "type": [ "null", "string" ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "risk",
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "RiskData",
+          "fields": [
+            {
+              "name": "isBusinessman",
+              "type": [ "null", "boolean" ]
+            },
+            {
+              "name": "isForeignTaxPayer",
+              "type": [ "null", "boolean" ]
+            },
+            {
+              "name": "pep",
+              "type": [ "null", "boolean" ]
+            },
+            {
+              "name": "registrationNumber",
+              "type": [ "null", "string" ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "amlQuestionnaire",
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "AmlQuestionnaire",
+          "fields": [
+            {
+              "name": "incomeTypeId",
+              "type": [ "null", "string" ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "type": "record",
+  "name": "BuildingSavingsCase_update",
+  "namespace": "cz.csas.avroschemas.BuildingSavingsCase_update.v1",
+  "fields": [
+    {
+      "name": "caseId",
+      "type": [ "null", "string" ],
+      "default": null
+    },
+    {
+      "name": "cluid",
+      "type": [ "null", "string" ],
+      "default": null
+    },
+    {
+      "name": "modificationTime",
+      "type": [ "null", "long" ],
+      "default": null
+    },
+    {
+      "name": "processingPhase",
+      "type": [ "null", "string" ],
+      "default": null
+    },
+    {
+      "name": "account",
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "BuildingSavingsCase_update_account",
+          "fields": [
+            {
+              "name": "accountNumber",
+              "type": [ "null", "string" ],
+              "default": null
+            },
+            {
+              "name": "accountPrefix",
+              "type": [ "null", "string" ],
+              "default": null
+            },
+            {
+              "name": "bankCode",
+              "type": [ "null", "string" ],
+              "default": null
+            }
+          ]
+        }
+      ],
+      "default": null
+    }
+  ]
+}
