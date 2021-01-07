@@ -1,0 +1,46 @@
+{
+  "type": "record",
+  "name": "BuildingSavingsCase_clientValidated",
+  "namespace": "cz.csas.avroschemas.BuildingSavingsCase_clientValidated.v1",
+  "fields": [
+    {
+      "name": "cluid",
+      "type": "string"
+    },
+    {
+      "name": "isValid",
+      "type": "boolean"
+    },
+    {
+      "name": "errors",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": {
+            "type": "record",
+            "name": "ValidationError",
+            "fields": [
+              {
+                "name": "errorCode",
+                "type": "string"
+              },
+              {
+                "name": "scope",
+                "type": "string"
+              },
+              {
+                "name": "severity",
+                "type": {
+                  "type": "enum",
+                  "name": "Severity",
+                  "symbols": [ "Error", "Warning" ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

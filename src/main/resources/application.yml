@@ -1,7 +1,10 @@
 bs:
   topic:
+    case: ...
     case-update: CMD.BuildingSavingsCase_update
     modelation-changed: EVT.BuildingSavingsModelation_changed
+    client-data-changed: ...
+    client-validated: ...
 
 quarkus:
   kafka-streams:
@@ -14,3 +17,4 @@ quarkus:
     topics:
       - CMD.BuildingSavingsCase_update
       - EVT.BuildingSavingsModelation_changed
+      # ...

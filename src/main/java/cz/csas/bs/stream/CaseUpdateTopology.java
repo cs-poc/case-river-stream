@@ -22,9 +22,7 @@ import java.util.Collections;
 import java.util.Map;
 
 @ApplicationScoped
-public class CaseUpdateTolology {
-
-    private static final Logger LOG = Logger.getLogger(CaseUpdateTolology.class);
+public class CaseUpdateTopology {
 
     @ConfigProperty(name = "bs.topic.case-update")
     String topicCaseUpdate;
@@ -35,7 +33,7 @@ public class CaseUpdateTolology {
 
     @Inject
     @SuppressWarnings("CdiInjectionPointsInspection")
-    public CaseUpdateTolology(KafkaStreamsRuntimeConfig runtimeConfig) {
+    public CaseUpdateTopology(KafkaStreamsRuntimeConfig runtimeConfig) {
         serdeConfig = runtimeConfig.schemaRegistryUrl.map(s -> Collections.singletonMap("schema.registry.url", s)).orElse(Collections.emptyMap());
     }
 
@@ -45,14 +43,13 @@ public class CaseUpdateTolology {
 
         builder
                 .stream(topicModelationChanged, Consumed.with(Serdes.String(), avroValueSerde(BuildingSavingsModelation_changed.class)))
-                .map((key, value) -> new KeyValue<>(value.getId().toString(), BuildingSavingsCase_update.newBuilder()
+                .map((key, value) -> KeyValue.pair(value.getId().toString(), BuildingSavingsCase_update.newBuilder()
                         .setCaseId(value.getId())
                         .setCluid(value.getCluid())
                         .setModificationTime(value.getDate().toEpochMilli()) // TODO coalesce
                         .setProcessingPhase("BS_DRAFT") // TODO constant
                         .build())
                 )
-                .peek((key, value) -> LOG.debugv("Sending {0} to {1}", key, topicCaseUpdate))
                 .to(topicCaseUpdate, Produced.with(Serdes.String(), avroValueSerde(BuildingSavingsCase_update.class)));
 
         return builder.build();

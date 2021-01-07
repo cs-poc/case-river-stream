@@ -1,0 +1,649 @@
+{
+  "type" : "record",
+  "name" : "BuildingSavingsCase",
+  "namespace" : "cz.csas.avroschemas.buildingsavingscase.v03_01",
+  "fields" : [ {
+    "name" : "caseId",
+    "type" : "string"
+  }, {
+    "name" : "caseType",
+    "type" : "string",
+    "doc" : "Typ pøipadu\r\n"
+  }, {
+    "name" : "cidla",
+    "type" : "string",
+    "doc" : "Id obchodniho pripadu (unikatniho skrz celou FSCS)."
+  }, {
+    "name" : "clients",
+    "type" : {
+      "type" : "record",
+      "name" : "Clients",
+      "fields" : [ {
+        "name" : "applicant",
+        "type" : {
+          "type" : "record",
+          "name" : "Applicant",
+          "fields" : [ {
+            "name" : "clientValidation",
+            "type" : {
+              "type" : "record",
+              "name" : "ClientValidationResult",
+              "fields" : [ {
+                "name" : "errors",
+                "type" : [ "null", {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "record",
+                    "name" : "ClientValidationError",
+                    "fields" : [ {
+                      "name" : "errorCode",
+                      "type" : "string",
+                      "doc" : "Chybovy kod"
+                    }, {
+                      "name" : "parameters",
+                      "type" : [ "null", {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "record",
+                          "name" : "ClientErrorParameters",
+                          "fields" : [ {
+                            "name" : "key",
+                            "type" : "string",
+                            "doc" : "Nazev dodatecneho parametru chyby"
+                          }, {
+                            "name" : "value",
+                            "type" : "string",
+                            "doc" : "Hodnota dodatecneho parametru chyby"
+                          } ]
+                        }
+                      } ],
+                      "default" : null
+                    }, {
+                      "name" : "scope",
+                      "type" : "string",
+                      "doc" : "Parametr, jehoz se chyba tyka"
+                    }, {
+                      "name" : "severity",
+                      "type" : {
+                        "type" : "enum",
+                        "name" : "EN_ErrorSeverity",
+                        "doc" : "Zavaznost chyby",
+                        "symbols" : [ "ERR", "WRN" ]
+                      },
+                      "doc" : "Zavaznost chyby"
+                    } ]
+                  }
+                } ],
+                "default" : null
+              }, {
+                "name" : "isValid",
+                "type" : "boolean",
+                "doc" : "Priznak, zda klient ma v poradku vsechny validace"
+              } ]
+            }
+          }, {
+            "name" : "cluid",
+            "type" : "string",
+            "doc" : "Jednotny identifikator klienta Ceske sporitelny.\r\n(Client unified ID)"
+          }, {
+            "name" : "person",
+            "type" : {
+              "type" : "record",
+              "name" : "Person",
+              "fields" : [ {
+                "name" : "additionalDegree",
+                "type" : [ "null", "string" ],
+                "doc" : "Additional academic degree. (Titul za jmenem.)",
+                "default" : null
+              }, {
+                "name" : "birthCountry",
+                "type" : [ "null", "string" ],
+                "doc" : "zeme narozeni",
+                "default" : null
+              }, {
+                "name" : "birthDate",
+                "type" : {
+                  "type" : "int",
+                  "logicalType" : "date"
+                },
+                "doc" : "Datum narozeni."
+              }, {
+                "name" : "birthPlace",
+                "type" : [ "null", "string" ],
+                "doc" : "misto (mesto) narozeni",
+                "default" : null
+              }, {
+                "name" : "citizenship",
+                "type" : [ "null", "string" ],
+                "doc" : "statni prislusnost / obcanstvi",
+                "default" : null
+              }, {
+                "name" : "contactAddress",
+                "type" : [ "null", {
+                  "type" : "record",
+                  "name" : "PostalAddress",
+                  "fields" : [ {
+                    "name" : "buildingNumber",
+                    "type" : [ "null", "string" ],
+                    "doc" : "Cislo orientacni\r\n",
+                    "default" : null
+                  }, {
+                    "name" : "city",
+                    "type" : "string",
+                    "doc" : "mesto"
+                  }, {
+                    "name" : "cityPart",
+                    "type" : [ "null", "string" ],
+                    "doc" : "Cast obce (napr. Malesice)",
+                    "default" : null
+                  }, {
+                    "name" : "country",
+                    "type" : "string",
+                    "doc" : "Stat\r\n"
+                  }, {
+                    "name" : "masterAddressId",
+                    "type" : "string",
+                    "doc" : "CRM ID adresy (row_id adresy v CRM)"
+                  }, {
+                    "name" : "registryBuildingNumber",
+                    "type" : [ "null", "string" ],
+                    "doc" : "Cislo popisne nebo evidencni. Zavisi to od typu budovy.",
+                    "default" : null
+                  }, {
+                    "name" : "street",
+                    "type" : [ "null", "string" ],
+                    "doc" : "ulice",
+                    "default" : null
+                  }, {
+                    "name" : "supplement",
+                    "type" : [ "null", "string" ],
+                    "default" : null
+                  }, {
+                    "name" : "zipCode",
+                    "type" : "string",
+                    "doc" : "PSC\r\n"
+                  } ]
+                } ],
+                "default" : null
+              }, {
+                "name" : "contactEmail",
+                "type" : [ "null", {
+                  "type" : "record",
+                  "name" : "Email",
+                  "fields" : [ {
+                    "name" : "email",
+                    "type" : "string",
+                    "doc" : "emailova adresa"
+                  } ]
+                } ],
+                "default" : null
+              }, {
+                "name" : "contactPhone",
+                "type" : [ "null", {
+                  "type" : "record",
+                  "name" : "PhoneNumber",
+                  "fields" : [ {
+                    "name" : "phoneNumber",
+                    "type" : "string",
+                    "doc" : "telefonni cislo"
+                  } ]
+                } ],
+                "default" : null
+              }, {
+                "name" : "crmRiskProfile",
+                "type" : {
+                  "type" : "record",
+                  "name" : "RiskProfile",
+                  "fields" : [ {
+                    "name" : "isCRSSigned",
+                    "type" : "boolean"
+                  }, {
+                    "name" : "ownerValid",
+                    "type" : "boolean",
+                    "doc" : "udava, jestli je klient overen AML na urovni majitel"
+                  }, {
+                    "name" : "riskLevel",
+                    "type" : "int",
+                    "doc" : "AML rizikovost klienta"
+                  } ]
+                }
+              }, {
+                "name" : "degree",
+                "type" : [ "null", "string" ],
+                "doc" : "Academic degree. (titul pred)",
+                "default" : null
+              }, {
+                "name" : "forename",
+                "type" : "string",
+                "doc" : "(krestni) jmeno"
+              }, {
+                "name" : "gender",
+                "type" : "string",
+                "doc" : "pohlavi"
+              }, {
+                "name" : "idCard",
+                "type" : [ "null", {
+                  "type" : "record",
+                  "name" : "IdCard",
+                  "fields" : [ {
+                    "name" : "cardNumber",
+                    "type" : "string",
+                    "doc" : "cislo dokladu"
+                  }, {
+                    "name" : "cardType",
+                    "type" : "string",
+                    "doc" : "typ ID dokladu (OP, cestovni pas, ridicsky prukaz...)"
+                  }, {
+                    "name" : "issuer",
+                    "type" : [ "null", "string" ],
+                    "doc" : "Udava kdo doklad vydal (urad).",
+                    "default" : null
+                  }, {
+                    "name" : "issuerCountry",
+                    "type" : [ "null", "string" ],
+                    "doc" : "(doklad) vydal stat",
+                    "default" : null
+                  }, {
+                    "name" : "validUntil",
+                    "type" : [ "null", {
+                      "type" : "int",
+                      "logicalType" : "date"
+                    } ],
+                    "doc" : "Platnost dokladu (do data)\r\n\r\nV CRM je povinne, ale muze prijit z jinych systemu nevyplnen.",
+                    "default" : null
+                  } ]
+                } ],
+                "default" : null
+              }, {
+                "name" : "legalCapability",
+                "type" : {
+                  "type" : "record",
+                  "name" : "LegalCapability",
+                  "fields" : [ {
+                    "name" : "IsUnderageActingByHimself",
+                    "type" : "boolean"
+                  }, {
+                    "name" : "isLegallyIncapable",
+                    "type" : "boolean"
+                  }, {
+                    "name" : "isUnderLegalAge",
+                    "type" : "boolean"
+                  } ]
+                }
+              }, {
+                "name" : "permanentAddress",
+                "type" : [ "null", "PostalAddress" ],
+                "default" : null
+              }, {
+                "name" : "personalId",
+                "type" : "string",
+                "doc" : "Pro ceske obcany to je rodne cislo. Pro cizince cislo odvozene od datumu narozani (jak rc) a posledne 4 cislice jsou devitky. Proto cizinci narozeni v jednom dni je maji rovnake."
+              }, {
+                "name" : "salutation",
+                "type" : [ "null", "string" ],
+                "doc" : "Prijmeni v patem pade.",
+                "default" : null
+              }, {
+                "name" : "surname",
+                "type" : "string",
+                "doc" : "prijmeni"
+              }, {
+                "name" : "taxResidency",
+                "type" : [ "null", "string" ],
+                "doc" : "Danove residentstvi.\r\nAtribut je povinny v master klientovi. Je vsak mozne zadat osobu do CRM bez nej.",
+                "default" : null
+              } ]
+            }
+          }, {
+            "name" : "updatedContacts",
+            "type" : {
+              "type" : "record",
+              "name" : "UpdatedContacts",
+              "fields" : [ {
+                "name" : "contactEmail",
+                "type" : [ "null", "Email" ],
+                "default" : null
+              } ]
+            }
+          } ]
+        }
+      }, {
+        "name" : "participant",
+        "type" : [ "null", {
+          "type" : "record",
+          "name" : "Participant",
+          "fields" : [ {
+            "name" : "amlAnswers",
+            "type" : [ "null", {
+              "type" : "record",
+              "name" : "AmlAnswers",
+              "fields" : [ {
+                "name" : "incomeTypeId",
+                "type" : "string",
+                "doc" : "Hlavni zdroj peneznich prostredku  (odpoved na otazku = 3)"
+              } ]
+            } ],
+            "default" : null
+          }, {
+            "name" : "clientValidation",
+            "type" : "ClientValidationResult"
+          }, {
+            "name" : "cluid",
+            "type" : "string",
+            "doc" : "Jednotny identifikator klienta Ceske sporitelny.\r\n(Client unified ID)"
+          }, {
+            "name" : "person",
+            "type" : "Person"
+          }, {
+            "name" : "relationToApplicant",
+            "type" : {
+              "type" : "enum",
+              "name" : "EN_RelationshipType",
+              "symbols" : [ "ME" ]
+            }
+          }, {
+            "name" : "riskData",
+            "type" : [ "null", {
+              "type" : "record",
+              "name" : "RiskData",
+              "fields" : [ {
+                "name" : "isForeignTaxPayer",
+                "type" : "boolean",
+                "doc" : "Priznak, zda klient plati dane i mimo CR"
+              }, {
+                "name" : "pep",
+                "type" : "boolean",
+                "doc" : "Udava, jestli je klient \"politicky exponovana osoba\"."
+              }, {
+                "name" : "registrationNumber",
+                "type" : [ "null", "string" ],
+                "doc" : "IC.",
+                "default" : null
+              } ]
+            } ],
+            "default" : null
+          } ]
+        } ],
+        "default" : null
+      } ]
+    }
+  }, {
+    "name" : "creationDate",
+    "type" : {
+      "type" : "long",
+      "logicalType" : "timestamp-millis"
+    },
+    "doc" : "Datum zalozeni pøipadu."
+  }, {
+    "name" : "creationSalesChannel",
+    "type" : "string",
+    "doc" : "Kanal, ve kterem byl Obchodni pripad (OP) zalozen"
+  }, {
+    "name" : "expirationDate",
+    "type" : [ "null", {
+      "type" : "int",
+      "logicalType" : "date"
+    } ],
+    "doc" : "Datum (automaticke) expirace / terminace",
+    "default" : null
+  }, {
+    "name" : "modificationDate",
+    "type" : {
+      "type" : "int",
+      "logicalType" : "date"
+    },
+    "doc" : "Datum posledni modifikace"
+  }, {
+    "name" : "newProduct",
+    "type" : [ "null", {
+      "type" : "record",
+      "name" : "BuildingSavingsDepositApplication",
+      "fields" : [ {
+        "name" : "account",
+        "type" : [ "null", {
+          "type" : "record",
+          "name" : "Account",
+          "fields" : [ {
+            "name" : "accountNumber",
+            "type" : "string",
+            "doc" : "Bank Account Number"
+          }, {
+            "name" : "accountPrefix",
+            "type" : "string",
+            "doc" : "Bank Account Number Prefix"
+          }, {
+            "name" : "bankCode",
+            "type" : "string",
+            "doc" : "Bank Code"
+          } ]
+        } ],
+        "default" : null
+      }, {
+        "name" : "contractingFee",
+        "type" : {
+          "type" : "bytes",
+          "logicalType" : "decimal",
+          "precision" : 18,
+          "scale" : 4
+        },
+        "doc" : "Uhrada za uzavreni smlouvy / dodatku ke smlouve."
+      }, {
+        "name" : "contractingFeeRatio",
+        "type" : {
+          "type" : "bytes",
+          "logicalType" : "decimal",
+          "precision" : 20,
+          "scale" : 10
+        },
+        "doc" : "Uhrada za uzavreni smlouvy / dodatku ke smlouve v % z cilove castky."
+      }, {
+        "name" : "depositInterestRate",
+        "type" : {
+          "type" : "bytes",
+          "logicalType" : "decimal",
+          "precision" : 10,
+          "scale" : 3
+        },
+        "doc" : "Urokova sazba vkladu Stavebniho sporeni"
+      }, {
+        "name" : "depositSum",
+        "type" : {
+          "type" : "bytes",
+          "logicalType" : "decimal",
+          "precision" : 18,
+          "scale" : 4
+        },
+        "doc" : "Vyse (suma) ucastnikovych vkladu za dobu trvani stavebniho sporeni (v korunach)\r\n\r\nPoznamka: vypocitano jako suma mesicnich vkladu * pocet let * 12 + suma jednorazovych vkladu (tj. mimoradne vklady + prvni platba)"
+      }, {
+        "name" : "interestAfterTax",
+        "type" : {
+          "type" : "bytes",
+          "logicalType" : "decimal",
+          "precision" : 18,
+          "scale" : 4
+        },
+        "doc" : "Suma pripsanych uroku po zdaneni (v korunach)"
+      }, {
+        "name" : "lastModelationDate",
+        "type" : {
+          "type" : "int",
+          "logicalType" : "date"
+        },
+        "doc" : "Datum posledni modelace"
+      }, {
+        "name" : "loanInterestRate",
+        "type" : {
+          "type" : "bytes",
+          "logicalType" : "decimal",
+          "precision" : 10,
+          "scale" : 3
+        },
+        "doc" : "Urokova sazba uveru ze Stavebniho sporeni"
+      }, {
+        "name" : "managementFee",
+        "type" : {
+          "type" : "bytes",
+          "logicalType" : "decimal",
+          "precision" : 18,
+          "scale" : 4
+        },
+        "doc" : "Cena za vedeni uctu (absolutne v Kc / rok)"
+      }, {
+        "name" : "managementFeeTotal",
+        "type" : {
+          "type" : "bytes",
+          "logicalType" : "decimal",
+          "precision" : 18,
+          "scale" : 4
+        },
+        "doc" : "Cena za vedeni uctu po predpokladanou dobu  (v korunach)\r\n\r\nPoznamka: vypoctena jako pocet let * management Fee (za rok)"
+      }, {
+        "name" : "monthlyDeposit",
+        "type" : {
+          "type" : "bytes",
+          "logicalType" : "decimal",
+          "precision" : 18,
+          "scale" : 4
+        },
+        "doc" : "Mesicni ulozka Stavebniho sporeni"
+      }, {
+        "name" : "newProductValidation",
+        "type" : [ "null", {
+          "type" : "record",
+          "name" : "ProductValidationResult",
+          "fields" : [ {
+            "name" : "errors",
+            "type" : [ "null", {
+              "type" : "array",
+              "items" : {
+                "type" : "record",
+                "name" : "ProductValidationError",
+                "fields" : [ {
+                  "name" : "errorCode",
+                  "type" : "string",
+                  "doc" : "Chybovy kod"
+                }, {
+                  "name" : "parameters",
+                  "type" : [ "null", {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "record",
+                      "name" : "ProductErrorParameters",
+                      "fields" : [ {
+                        "name" : "key",
+                        "type" : "string",
+                        "doc" : "Nazev dodatecneho parametru chyby"
+                      }, {
+                        "name" : "value",
+                        "type" : "string",
+                        "doc" : "Hodnota dodatecneho parametru chyby"
+                      } ]
+                    }
+                  } ],
+                  "default" : null
+                }, {
+                  "name" : "scope",
+                  "type" : "string",
+                  "doc" : "Parametr, jehoz se chyba tyka"
+                }, {
+                  "name" : "severity",
+                  "type" : "EN_ErrorSeverity",
+                  "doc" : "Zavaznost chyby"
+                } ]
+              }
+            } ],
+            "default" : null
+          }, {
+            "name" : "isValid",
+            "type" : "boolean",
+            "doc" : "Priznak, zda klient ma v poradku vsechny validace"
+          } ]
+        } ],
+        "default" : null
+      }, {
+        "name" : "participantType",
+        "type" : {
+          "type" : "enum",
+          "name" : "EN_ParticipantType",
+          "doc" : "Pro koho se spori",
+          "symbols" : [ "CHILD", "ME" ]
+        },
+        "doc" : "Pro koho se spori"
+      }, {
+        "name" : "stateSubsidy",
+        "type" : "boolean",
+        "doc" : "Pozadovano priznani statni podpory"
+      }, {
+        "name" : "subsidyAmountSum",
+        "type" : {
+          "type" : "bytes",
+          "logicalType" : "decimal",
+          "precision" : 18,
+          "scale" : 4
+        },
+        "doc" : "Maximalni vyse (suma) statni podpory za dobu trvani stavebniho sporeni (v korunach)\r\n\r\nPoznamka: vypoctena jako pocet let * min{10% z rocni nasporene castce ( = 12 * mesicni vklad ), 2000}"
+      }, {
+        "name" : "targetAmount",
+        "type" : {
+          "type" : "bytes",
+          "logicalType" : "decimal",
+          "precision" : 18,
+          "scale" : 4
+        },
+        "doc" : "Cilova castka Stavebniho sporeni"
+      }, {
+        "name" : "totalSavings",
+        "type" : {
+          "type" : "bytes",
+          "logicalType" : "decimal",
+          "precision" : 18,
+          "scale" : 4
+        },
+        "doc" : "Vyse (suma) prostredku na konci sporeni (v korunach)"
+      }, {
+        "name" : "years",
+        "type" : "int",
+        "doc" : "Pocet let stavebniho sporeni"
+      } ]
+    } ],
+    "default" : null
+  }, {
+    "name" : "operationType",
+    "type" : {
+      "type" : "enum",
+      "name" : "EN_OperationType",
+      "doc" : "Typ operace, ktera se v ramci OP provadi",
+      "symbols" : [ "NEW_PRODUCT" ]
+    },
+    "doc" : "Typ operace, ktera se v ramci OP provadi"
+  }, {
+    "name" : "revision",
+    "type" : "int",
+    "doc" : "Interni cislo revize"
+  }, {
+    "name" : "state",
+    "type" : {
+      "type" : "record",
+      "name" : "CaseStateInformation",
+      "fields" : [ {
+        "name" : "caseState",
+        "type" : "string",
+        "doc" : "Stav Obchodniho pripadu"
+      }, {
+        "name" : "lastProcessPhaseChangeDate",
+        "type" : {
+          "type" : "long",
+          "logicalType" : "timestamp-millis"
+        },
+        "doc" : "Datum posledni zmeny stavu Obchodniho pripadu (processPhase)"
+      }, {
+        "name" : "processPhase",
+        "type" : "string",
+        "doc" : "Faze procesu Obchodniho pripadu"
+      } ]
+    }
+  }, {
+    "name" : "url",
+    "type" : "string"
+  } ]
+}
